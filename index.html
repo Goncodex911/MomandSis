@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Món Quà Yêu Thương Dành Tặng Mẹ, Chị Bé & Chị Trọc | 20/10 Trọn Vẹn</title>
+  <meta name="description" content="Trang thiệp chúc mừng và tặng hoa tương tác kỷ niệm ngày 20/10 dành tặng Mẹ, Chị Bé và Chị Trọc.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Canvas hiệu ứng cánh hoa rơi nhẹ nhàng -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- YouTube Hidden Player (Nhạc Young and Beautiful) -->
+  <div id="youtube-player" style="position: fixed; top: -9999px; left: -9999px; width: 1px; height: 1px; pointer-events: none;"></div>
+
+  <!-- Nút điều khiển âm nhạc góc phải trên nhẹ nhàng -->
+  <aside class="music-controller" id="music-controller" title="Bật/Tắt nhạc nền">
+    <div class="music-disc" id="music-disc">
+      <div class="disc-core"></div>
+      <svg class="music-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+      </svg>
+    </div>
+    <span class="music-label" id="music-status-text">Bật nhạc 🎵</span>
+  </aside>
+
+  <!-- ================= HERO SECTION: 3 BỨC ẢNH CỦA MẸ, CHỊ BÉ & CHỊ TRỌC ================= -->
+  <header class="hero-showcase" id="hero-showcase">
+    <div class="hero-intro">
+      <div class="badge-date">20 · 10 · 2026</div>
+      <h1 class="hero-title">Gửi Trọn Yêu Thương Đến Mẹ, Chị Bé & Chị Trọc</h1>
+      <p class="hero-subtitle">
+        Nhân ngày Phụ nữ Việt Nam 20/10 • Chạm vào ảnh của từng người để mở bức thiệp yêu thương và nhận vườn hoa rạng rỡ!
+      </p>
+    </div>
+
+    <!-- 3 Tấm Ảnh Kỷ Niệm Tương Tác -->
+    <div class="people-grid" id="people-grid">
+      <!-- Thẻ 1: Mẹ Kính Yêu -->
+      <article class="person-card active" data-person="me" id="card-person-me">
+        <div class="card-polaroid">
+          <div class="photo-wrapper">
+            <img src="asset/me_yeu.jpg" alt="Mẹ Kính Yêu" class="person-photo">
+            <span class="person-badge">MẸ KÍNH YÊU ❤️</span>
+          </div>
+          <div class="card-caption">
+            <h2 class="person-name">Mẹ Yêu Dấu</h2>
+            <p class="person-desc">Bến đỗ bình yên & tình yêu thương vô bờ bến của cả gia đình</p>
+            <span class="touch-prompt">Chạm vào ảnh để mở thiệp</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Thẻ 2: Chị Bé -->
+      <article class="person-card" data-person="chi_be" id="card-person-chi-be">
+        <div class="card-polaroid">
+          <div class="photo-wrapper">
+            <img src="asset/chi_hai.jpg" alt="Chị Bé" class="person-photo">
+            <span class="person-badge">CHỊ BÉ 🌷</span>
+          </div>
+          <div class="card-caption">
+            <h2 class="person-name">Chị Bé</h2>
+            <p class="person-desc">Gia đình êm ấm, tài lộc may mắn & bé con 2 tuổi ngoan ngoãn</p>
+            <span class="touch-prompt">Chạm vào ảnh để mở thiệp</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Thẻ 3: Chị Trọc -->
+      <article class="person-card" data-person="chi_troc" id="card-person-chi-troc">
+        <div class="card-polaroid">
+          <div class="photo-wrapper">
+            <img src="asset/chi_hien_minh.jpg" alt="Chị Trọc" class="person-photo">
+            <span class="person-badge">CHỊ TRỌC 🌸</span>
+          </div>
+          <div class="card-caption">
+            <h2 class="person-name">Chị Trọc</h2>
+            <p class="person-desc">Mẹ tròn con vuông, gia đình viên mãn & vạn sự hanh thông</p>
+            <span class="touch-prompt">Chạm vào ảnh để mở thiệp</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </header>
+
+  <!-- ================= GIAI ĐOẠN: THIỆP CHÚC MỪNG & VƯỜN HOA NỞ RỘ ================= -->
+  <section class="scene-card hidden" id="scene-card">
+    <div class="card-container">
+      <!-- Bức Thiệp Chúc Mừng -->
+      <div class="greeting-card-wrapper">
+        <div class="card-header-decor">
+          <span class="floral-branch">🌸</span>
+          <span class="card-tag" id="card-tag">CON CHÚC MỪNG MẸ NGÀY 20/10</span>
+          <span class="floral-branch">🌸</span>
+        </div>
+
+        <div class="greeting-card" id="greeting-card">
+          <div class="card-glow-layer"></div>
+
+          <div class="card-inner">
+            <!-- Avatar người nhận trong khung tròn ánh kim -->
+            <div class="card-avatar-wrapper">
+              <div class="card-avatar-glow"></div>
+              <img src="asset/me_yeu.jpg" alt="Avatar" class="card-avatar-img" id="card-avatar-img">
+              <div class="card-heart-badge">❤️</div>
+            </div>
+
+            <!-- Lời chào & Tên -->
+            <div class="salutation-box">
+              <span class="salutation-label">Thân gửi:</span>
+              <h2 class="recipient-name" id="display-recipient">Mẹ Kính Yêu</h2>
+              <span class="role-badge" id="display-role-tag">MẸ YÊU DẤU ❤️</span>
+            </div>
+
+            <!-- Nội dung thư gõ máy -->
+            <div class="letter-body">
+              <p class="typewriter-text" id="typewriter-message"></p>
+              <span class="typewriter-cursor" id="typewriter-cursor">|</span>
+            </div>
+
+            <!-- Chân thiệp -->
+            <div class="letter-footer">
+              <blockquote class="wishes-quote" id="card-quote-text">
+                "Mẹ là bến đỗ bình yên nhất, là tình yêu thương vô điều kiện của cả cuộc đời con."
+              </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= VƯỜN HOA NỞ RỘ TỪ 1 BÔNG HOA DUY NHẤT ================= -->
+      <div class="garden-stage" id="garden-stage">
+        <canvas id="garden-canvas" aria-hidden="true"></canvas>
+
+        <!-- Hitbox vô hình ngay trên bông hoa trung tâm để chạm vào hoa là nở -->
+        <button class="garden-flower-hitbox" id="garden-flower-hitbox" type="button" aria-label="Chạm vào hoa để cả vườn hoa nở rộ"></button>
+
+        <div class="garden-hint-box">
+          <p class="garden-status" id="garden-status-text">
+            Chạm vào bông hoa hồng để cả vườn hoa bung nở!
+          </p>
+        </div>
+      </div>
+
+      <!-- Chọn người khác -->
+      <div class="back-to-people-action">
+        <a href="#hero-showcase" class="back-to-people-link">
+          ↑ Chọn xem thiệp của Mẹ, Chị Bé hoặc Chị Trọc ↑
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- YouTube Iframe API Script -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+
+  <!-- Core Scripts -->
+  <script src="js/garden-botany.js"></script>
+  <script src="js/wishes.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/petals.js"></script>
+  <script src="js/hearts.js"></script>
+  <script src="js/garden.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

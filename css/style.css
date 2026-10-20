@@ -1,0 +1,656 @@
+/* =========================================================
+   STYLE.CSS - LUXURY WOMEN'S DAY TRIBUTE (MOM, CHỊ BÉ & CHỊ TRỌC)
+   - Color Palette: Rose Petal, Deep Wine, Warm Gold, Soft Pearl
+   - Glassmorphism & Botanical Garden Canvas
+   - Pure touch interactions (touch photo -> open card, touch flower -> bloom garden)
+   ========================================================= */
+
+:root {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-script: 'Dancing Script', cursive;
+
+  /* Color Palette */
+  --color-primary: #e11d48;
+  --color-primary-light: #fb7185;
+  --color-primary-soft: #ffe4e6;
+  --color-wine: #831843;
+  --color-wine-dark: #4c0519;
+  --color-gold: #d97706;
+  --color-gold-light: #fbbf24;
+  --color-bg-start: #fff1f2;
+  --color-bg-mid: #ffe4e6;
+  --color-bg-end: #fdf2f8;
+
+  --color-text-main: #374151;
+  --color-text-muted: #6b7280;
+
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-bg-card: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.95);
+  --glass-border-pink: rgba(244, 63, 94, 0.25);
+
+  --shadow-sm: 0 4px 12px rgba(131, 24, 67, 0.08);
+  --shadow-md: 0 10px 28px rgba(131, 24, 67, 0.12);
+  --shadow-lg: 0 20px 45px rgba(131, 24, 67, 0.18);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at 50% 0%, var(--color-bg-start) 0%, var(--color-bg-mid) 45%, var(--color-bg-end) 100%);
+  color: var(--color-text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+}
+
+/* Canvas Cánh hoa rơi */
+#petals-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Nút điều khiển âm nhạc góc phải trên */
+.music-controller {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 6px 14px 6px 8px;
+  border-radius: 40px;
+  border: 1px solid var(--glass-border-pink);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.music-controller:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: #ffffff;
+  box-shadow: var(--shadow-md);
+}
+
+.music-disc {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #18181b 30%, #27272a 70%, #09090b 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 2px solid #fda4af;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.disc-core {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #f43f5e;
+  border: 2px solid #ffffff;
+}
+
+.music-icon {
+  width: 14px;
+  height: 14px;
+  color: #ffffff;
+  z-index: 2;
+  opacity: 0.9;
+}
+
+.music-disc.playing {
+  animation: spinDisc 3s linear infinite;
+}
+
+@keyframes spinDisc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.music-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-wine);
+  letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   HERO SECTION: 3 BỨC ẢNH CỦA MẸ, CHỊ BÉ & CHỊ TRỌC
+   ========================================================= */
+.hero-showcase {
+  position: relative;
+  z-index: 5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 60px;
+  text-align: center;
+}
+
+.hero-intro {
+  max-width: 840px;
+  margin-bottom: 35px;
+  animation: fadeInDown 1s ease-out;
+}
+
+.badge-date {
+  display: inline-block;
+  padding: 5px 16px;
+  background: linear-gradient(135deg, #fbcfe8, #f472b6);
+  color: var(--color-wine);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  border-radius: 30px;
+  box-shadow: 0 4px 14px rgba(244, 114, 182, 0.3);
+  margin-bottom: 14px;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--color-wine);
+  line-height: 1.25;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 10px rgba(244, 63, 94, 0.12);
+}
+
+.hero-subtitle {
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--color-text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Lưới 3 Tấm Ảnh */
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1100px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.person-card {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.person-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.person-card.active .card-polaroid {
+  border-color: var(--color-primary);
+  box-shadow: 0 20px 45px rgba(225, 29, 72, 0.25), 0 0 0 3px rgba(251, 113, 133, 0.4);
+}
+
+.card-polaroid {
+  background: #ffffff;
+  padding: 14px 14px 20px;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(251, 207, 232, 0.6);
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.photo-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #fdf2f4;
+}
+
+.person-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.person-card:hover .person-photo {
+  transform: scale(1.06);
+}
+
+.person-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(131, 24, 67, 0.88);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.card-caption {
+  padding-top: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.person-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-wine);
+  margin-bottom: 6px;
+}
+
+.person-desc {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.touch-prompt {
+  display: inline-block;
+  font-size: 0.78rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  padding: 4px 12px;
+  background: var(--color-primary-soft);
+  border-radius: 20px;
+  transition: all 0.25s ease;
+}
+
+.person-card:hover .touch-prompt {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+/* =========================================================
+   SCENE: THIỆP CHÚC MỪNG & VƯỜN HOA NỞ RỘ
+   ========================================================= */
+.scene-card {
+  position: relative;
+  z-index: 6;
+  min-height: 100vh;
+  padding: 50px 20px 80px;
+  display: flex;
+  justify-content: center;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scene-card.hidden {
+  display: none;
+  opacity: 0;
+}
+
+.card-container {
+  max-width: 860px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.greeting-card-wrapper {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.card-header-decor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.card-tag {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--color-wine);
+  background: linear-gradient(135deg, #fbcfe8, #f472b6);
+  padding: 6px 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 15px rgba(244, 114, 182, 0.25);
+}
+
+.greeting-card {
+  position: relative;
+  background: var(--glass-bg-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-lg), 0 0 0 1px rgba(251, 113, 133, 0.15);
+  padding: 40px 36px;
+  overflow: hidden;
+}
+
+.card-glow-layer {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 30%, rgba(254, 205, 211, 0.3) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Avatar người nhận */
+.card-avatar-wrapper {
+  position: relative;
+  width: 110px;
+  height: 110px;
+  margin-bottom: 20px;
+}
+
+.card-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 8px 20px rgba(131, 24, 67, 0.25);
+}
+
+.card-avatar-glow {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fb7185, #f59e0b);
+  z-index: -1;
+  filter: blur(4px);
+  animation: avatarPulse 3s infinite ease-in-out;
+}
+
+@keyframes avatarPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+.card-heart-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.salutation-box {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.salutation-label {
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  color: var(--color-wine);
+  font-weight: 600;
+}
+
+.recipient-name {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 700;
+  color: var(--color-wine);
+  line-height: 1.2;
+  margin: 4px 0 8px;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: rgba(225, 29, 72, 0.1);
+  color: var(--color-primary);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Thân thư gõ máy */
+.letter-body {
+  width: 100%;
+  min-height: 180px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  padding: 24px 28px;
+  border: 1px dashed rgba(251, 113, 133, 0.35);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.typewriter-text {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color: #374151;
+  white-space: pre-line;
+  font-weight: 400;
+}
+
+.typewriter-cursor {
+  font-weight: 700;
+  color: var(--color-primary);
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.letter-footer {
+  width: 100%;
+  border-top: 1px solid rgba(251, 113, 133, 0.25);
+  padding-top: 18px;
+  text-align: center;
+}
+
+.wishes-quote {
+  font-family: var(--font-script);
+  font-size: 1.35rem;
+  color: var(--color-wine);
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   VƯỜN HOA NỔI TRỰC TIẾP (BOTANICAL CANVAS GARDEN)
+   ========================================================= */
+.garden-stage {
+  position: relative;
+  width: 100%;
+  max-width: 860px;
+  height: 520px;
+  margin: 10px auto 30px;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, rgba(254, 205, 211, 0.25) 70%, transparent 100%);
+  border: 1px solid var(--glass-border-pink);
+  box-shadow: var(--shadow-md);
+}
+
+#garden-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Hitbox vô hình phủ chính xác lên bông hoa giữa */
+.garden-flower-hitbox {
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  outline: none;
+}
+
+.garden-hint-box {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 22px;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 1px solid var(--glass-border-pink);
+  box-shadow: 0 4px 15px rgba(131, 24, 67, 0.08);
+  pointer-events: none;
+}
+
+.garden-status {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--color-wine);
+  font-weight: 600;
+  text-align: center;
+}
+
+.back-to-people-action {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.back-to-people-link {
+  color: var(--color-wine);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border-pink);
+  transition: all 0.25s ease;
+  display: inline-block;
+}
+
+.back-to-people-link:hover {
+  background: #ffffff;
+  color: var(--color-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* =========================================================
+   ANIMATIONS & RESPONSIVE DESIGN
+   ========================================================= */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+    gap: 24px;
+  }
+
+  .garden-stage {
+    height: 440px;
+  }
+
+  .greeting-card {
+    padding: 30px 20px;
+  }
+
+  .letter-body {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-showcase {
+    padding-top: 70px;
+  }
+
+  .music-controller {
+    top: 14px;
+    right: 14px;
+    padding: 4px 10px 4px 6px;
+  }
+
+  .music-label {
+    display: none;
+  }
+
+  .garden-stage {
+    height: 380px;
+  }
+
+  .garden-flower-hitbox {
+    width: 130px;
+    height: 130px;
+  }
+}
